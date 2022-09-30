@@ -16,6 +16,7 @@
 	},
 	"dependencies": {
 		"@pinia/nuxt": "^0.4.2",
-		"ethers": "^5.7.1"
+		"ethers": "^5.7.1",
+		"moralis": "^2.6.0"
 	}
 }

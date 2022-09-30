@@ -1,24 +1,21 @@
 <template>
-	<div>
+	<div class="border-b-2">
 		<div class="flex flex-row justify-between h-20 items-center mx-10 mt-5">
 			<div class="text-2xl">Decentralized Raffle</div>
-
 			<div class="text-lg flex gap-6 justify-center items-center">
-				<div class="trans">Wallet: {{ cryptoStore.address }}</div>
-				<div
-					class="rounded dark:bg-gray-700 px-2 py-1 dark:hover:bg-gray-500 hover:cursor-pointer trans"
-					@click="handleConnect"
-					v-if="!cryptoStore.connected"
-				>
-					Connect
+				<div class="trans flex gap-4">
+					<div>{{ cryptoStore.balance }}</div>
+					<div>{{ cryptoStore.formattedAddress }}</div>
 				</div>
-				<!-- <div
-					class="rounded dark:bg-gray-700 px-2 py-1 dark:hover:bg-gray-500 hover:cursor-pointer trans"
-					@click="handleDisconnect"
-					v-if="formattedAddress"
-				>
-					Disconnect
-				</div> -->
+				<transition name="fade" mode="out-in">
+					<div
+						class="rounded dark:bg-gray-700 px-2 py-1 dark:hover:bg-gray-500 hover:cursor-pointer trans"
+						@click="handleConnect"
+						v-if="!cryptoStore.connected"
+					>
+						Connect
+					</div>
+				</transition>
 			</div>
 		</div>
 	</div>

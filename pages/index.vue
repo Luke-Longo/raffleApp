@@ -1,16 +1,15 @@
 <template>
 	<div class="dark:bg-black">
 		<Nav @connect="handleConnect" :address="cryptoStore.address" />
-		<div>
-			<div>
-				<button @click="getWalletData">Get Wallet Data</button>
-			</div>
+		<div class="m-10 p-10">
+			<h3 class="header">Lottery Entrance</h3>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 import Nav from "../components/Ui/Nav.vue";
+import Card from "../components/Ui/Card.vue";
 import { useCryptoStore } from "../stores/crypto";
 
 const cryptoStore = useCryptoStore();
@@ -20,7 +19,9 @@ const handleConnect = async () => {
 	await cryptoStore.connectMeta();
 };
 onMounted(async () => {
-	await cryptoStore.connectMeta();
+	if (window.ethereum.isConnected()) {
+		await cryptoStore.connectMeta();
+	}
 });
 </script>
 
@@ -31,5 +32,8 @@ onMounted(async () => {
 
 button {
 	@apply dark:hover:bg-gray-700 transition-all px-2 rounded-md py-1;
+}
+.header {
+	@apply text-2xl;
 }
 </style>
