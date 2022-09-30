@@ -2,75 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Base styles
+ */
+@font-face {
+	font-family: MyFont;
+	src: url("../fonts/OpenSans-Regular.ttf");
+}
+* {
+	border: none;
+	font-family: MyFont;
+}
+
 @layer components {
-	.trans {
-		@apply transition-all duration-300;
-	}
 	.card {
 		@apply rounded-xl shadow-lg p-3;
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 		transition: 0.3s;
 	}
-}
-
-.fade-enter-active,
-.fade-leave-active {
-	transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-	opacity: 0;
-}
-.route-fade-enter-active,
-.route-fade-leave-active {
-	transition: opacity 0.15s ease;
-}
-
-.route-fade-enter-from,
-.route-fade-leave-to {
-	opacity: 0;
-}
-.sidebar-enter-active {
-	animation: slide 0.3s;
-}
-.sidebar-leave-active {
-	animation: slide 0.3s reverse;
-}
-
-@keyframes slide {
-	from {
-		opacity: 0;
-		transform: translateX(-220px) scale(1);
+	p {
+		@apply text-primary dark:text-darkSecondary;
 	}
-	to {
-		opacity: 100;
-		transform: translateX(0) scale(1);
+
+	button,
+	.btn {
+		border: 1px;
+		@apply focus:ring-darkBg border-solid border-darkSecondary py-2 px-4 rounded-full trans text-white bg-primary hover:bg-secondary hover:text-white  dark:hover:text-darkSecondary dark:hover:bg-black dark:bg-darkPrimary  trans;
 	}
-}
-
-.modal-backdrop {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: rgba(0, 0, 0, 0.3);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.modal {
-	overflow-x: auto;
-}
-
-.modal-fade-enter-from,
-.modal-fade-leave-to {
-	opacity: 0;
-}
-
-.modal-fade-enter-active,
-.modal-fade-leave-active {
-	transition: opacity 0.5s ease;
+	input {
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		@apply border shadow-sm border-slate-300 placeholder-slate-400 text-primary dark:text-darkSecondary focus:outline-primary dark:bg-darkBg dark:focus:outline-darkPrimary;
+	}
+	label {
+		@apply text-lg font-semibold items-start text-primary dark:text-darkSecondary;
+	}
+	.reverse {
+		border: 1px;
+		@apply outline-none border-solid border-primary  text-primary bg-white dark:border-darkSecondary dark:bg-black dark:text-darkSecondary py-2 px-4 rounded-full hover:text-darkSecondary hover:bg-primary dark:hover:border-darkSecondary dark:hover:bg-darkPrimary trans;
+	}
+	.trans {
+		@apply transition-all duration-300;
+	}
+	.icon {
+		align-items: center;
+		align-self: center;
+		font-size: 1.5rem;
+		@apply cursor-pointer justify-center items-center mx-4 text-primary hover:text-secondary dark:text-darkSecondary hover:dark:text-darkPrimary trans;
+	}
+	.checkbox {
+		border: 1px;
+		@apply appearance-none cursor-pointer h-5 w-5 border-solid border-primary dark:border-darkSecondary rounded-md dark:bg-black mx-4 trans;
+	}
+	.checkbox:checked {
+		@apply bg-primary border-darkSecondary  dark:bg-darkPrimary trans;
+	}
+	.header {
+		@apply text-center text-primary dark:text-darkSecondary text-5xl my-6 mx-4;
+	}
 }

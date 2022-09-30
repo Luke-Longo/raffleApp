@@ -23,11 +23,9 @@ export default defineNuxtConfig({
 		public: {
 			rpcUrl: process.env.ALCHEMY_RPC_URL,
 			contractAddress: process.env.CONTRACT_ADDRESS,
-			moralisApiKey: process.env.MORALIS_API_KEY,
 		},
 		private: {
 			moralisApiKey: process.env.MORALIS_API_KEY,
 		},
 	},
-	plugins: ["~/plugins/moralis.ts"],
 });

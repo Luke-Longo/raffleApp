@@ -1,26 +1,31 @@
 <template>
 	<div class="dark:bg-black">
-		<UiNav @connect="handleConnect" :address="cryptoStore.address" />
-		<div class="m-10 p-10">
-			<h3 class="header">Lottery Entrance</h3>
+		<UiNav @connect="handleConnect" />
+		<ClientOnly>
+			<div>
+				<LotteryEntrance />
+			</div>
+		</ClientOnly>
+		<div
+			v-if="cryptoStore.loading"
+			class="flex flex-grow mt-40 justify-center trans bg-darkBg bg-opacity-30"
+		>
+			<UiBaseSpinner />
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { useCryptoStore } from "../stores/crypto";
+import { useCryptoStore } from "~~/stores/crypto";
 
 const cryptoStore = useCryptoStore();
 
-const handleConnect = async () => {
+console.log("loading", cryptoStore.loading);
+
+const handleConnect = () => {
+	cryptoStore.connectMeta();
 	console.log("connect");
-	await cryptoStore.connectMeta();
 };
-onMounted(async () => {
-	if (window.ethereum.isConnected()) {
-		await cryptoStore.connectMeta();
-	}
-});
 </script>
 
 <style>
