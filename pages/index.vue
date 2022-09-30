@@ -1,27 +1,27 @@
 <template>
 	<div class="dark:bg-black">
-		<Nav @connect="handleConnect" />
-		<web3-modal-vue
-			ref="web3modal"
-			:theme="theme"
-			:provider-options="providerOptions"
-			cache-provider
-		/>
+		<Nav @connect="handleConnect" :address="cryptoStore.address" />
+		<div>
+			<div>
+				<button @click="getWalletData">Get Wallet Data</button>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import Nav from "@/components/Ui/Nav.vue";
-import web3Modal from "web3modal-vue3/src/components/Modal.vue";
+import Nav from "../components/Ui/Nav.vue";
+import { useCryptoStore } from "../stores/crypto";
 
-// import WalletConnectProvider from "@walletconnect/web3-provider";
-// import { web3Modal } from "./config/mixins";
-
-console.log(web3Modal);
+const cryptoStore = useCryptoStore();
 
 const handleConnect = async () => {
 	console.log("connect");
+	await cryptoStore.connectMeta();
 };
+onMounted(async () => {
+	await cryptoStore.connectMeta();
+});
 </script>
 
 <style>
