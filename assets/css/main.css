@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.trans {
+		@apply transition-all duration-300;
+	}
+	.card {
+		@apply rounded-xl shadow-lg p-3;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+		transition: 0.3s;
+	}
+}

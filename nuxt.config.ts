@@ -18,4 +18,9 @@ export default defineNuxtConfig({
 			autoprefixer: {},
 		},
 	},
+	runtimeConfig: {
+		private: {
+			moralisApiKey: process.env.MORALIS_API_KEY,
+		},
+	},
 });
