@@ -1,4 +1,5 @@
 export default defineNuxtConfig({
+	head: {},
 	modules: [
 		"@nuxtjs/tailwindcss",
 		[
@@ -22,9 +23,8 @@ export default defineNuxtConfig({
 	runtimeConfig: {
 		public: {
 			rpcUrl: process.env.ALCHEMY_RPC_URL,
-			moralisServerUrl: process.env.MORALIS_SERVER_URL,
-			moralisAppId: process.env.MORALIS_APP_ID,
 			contractAddress: process.env.CONTRACT_ADDRESS,
+			moralisApiKey: process.env.MORALIS_API_KEY,
 		},
 		private: {
 			moralisApiKey: process.env.MORALIS_API_KEY,

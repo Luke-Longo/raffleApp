@@ -1,6 +1,6 @@
 <template>
 	<div class="dark:bg-black">
-		<Nav @connect="handleConnect" :address="cryptoStore.address" />
+		<UiNav @connect="handleConnect" :address="cryptoStore.address" />
 		<div class="m-10 p-10">
 			<h3 class="header">Lottery Entrance</h3>
 		</div>
@@ -8,8 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import Nav from "../components/Ui/Nav.vue";
-import Card from "../components/Ui/Card.vue";
 import { useCryptoStore } from "../stores/crypto";
 
 const cryptoStore = useCryptoStore();
