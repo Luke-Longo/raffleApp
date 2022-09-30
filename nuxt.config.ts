@@ -1,5 +1,4 @@
 export default defineNuxtConfig({
-	head: {},
 	modules: [
 		"@nuxtjs/tailwindcss",
 		[

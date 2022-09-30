@@ -1,1 +1,0 @@
-export const fundMeAddress = "0x578d9152A785b216436A2a8A1EB178cB0e294183";
