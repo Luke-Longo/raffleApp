@@ -28,4 +28,12 @@ export default defineNuxtConfig({
 			moralisApiKey: process.env.MORALIS_API_KEY,
 		},
 	},
+	buildModules: [
+		[
+			"unplugin-icons/nuxt",
+			{
+				/* options */
+			},
+		],
+	],
 });

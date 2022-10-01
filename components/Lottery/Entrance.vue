@@ -1,6 +1,6 @@
 <template>
 	<div class="m-10 p-10 flex flex-col gap-5">
-		<h3 class="header">Lottery Entrance</h3>
+		<h3 class="header">Lottery Entrance (Goerli Testnet)</h3>
 		<client-only>
 			<div class="flex gap-5 justify-center items-center">
 				<div>Current Entrance Fee is {{ cryptoStore.entranceFee }} ETH</div>

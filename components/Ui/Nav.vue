@@ -4,14 +4,12 @@
 			<div class="text-2xl">Decentralized Raffle</div>
 			<div class="text-lg flex gap-6 justify-center items-center">
 				<transition name="fade" mode="out-in">
-					<div
+					<IconSun
 						class="icon"
 						v-if="cryptoStore.theme === 'light'"
 						@click="cryptoStore.toggleTheme"
-					>
-						Dark
-					</div>
-					<div class="icon" v-else @click="cryptoStore.toggleTheme">Light</div>
+					/>
+					<IconMoon class="icon" v-else @click="cryptoStore.toggleTheme" />
 				</transition>
 				<div class="trans flex gap-4">
 					<div>{{ cryptoStore.balance }}</div>
@@ -32,6 +30,9 @@
 </template>
 
 <script setup lang="ts">
+import IconMoon from "~icons/fa-solid/moon";
+import IconSun from "~icons/fa-solid/sun";
+
 import { useCryptoStore } from "~~/stores/crypto";
 
 const cryptoStore = useCryptoStore();

@@ -10,6 +10,19 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
+"@antfu/install-pkg@^0.1.0", "@antfu/install-pkg@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@antfu/install-pkg/-/install-pkg-0.1.1.tgz#157bb04f0de8100b9e4c01734db1a6c77e98bbb5"
+  integrity sha512-LyB/8+bSfa0DFGC06zpCEfs89/XoWZwws5ygEa5D+Xsm3OfI+aXQ86VgVG7Acyef+rSZ5HE7J8rrxzrQeM3PjQ==
+  dependencies:
+    execa "^5.1.1"
+    find-up "^5.0.0"
+
+"@antfu/utils@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@antfu/utils/-/utils-0.5.2.tgz#8c2d931ff927be0ebe740169874a3d4004ab414b"
+  integrity sha512-CQkeV+oJxUazwjlHD0/3ZD08QWKuGQkhnrKo3e6ly5pd48VUpXbb77q0xMU4+vc2CkJnDS02Eq/M9ugyX20XZA==
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.18.6":
   version "7.18.6"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.18.6.tgz#3b25d38c89600baa2dcc219edfa88a74eb2c427a"
@@ -657,6 +670,31 @@
     "@ethersproject/logger" "^5.7.0"
     "@ethersproject/properties" "^5.7.0"
     "@ethersproject/strings" "^5.7.0"
+
+"@iconify/json@^2.1.115":
+  version "2.1.115"
+  resolved "https://registry.yarnpkg.com/@iconify/json/-/json-2.1.115.tgz#ad8a549cf1a77dc1eb5911815a0e587e452f871a"
+  integrity sha512-yfLP+5b2d2k4HQDaE3PGBojl9XgifKEh9Tytpkui8jshgDjQZ3NXbE/nKr4Dxtz+zw7kvq1XWzlsCKsyyJ8TqQ==
+  dependencies:
+    "@iconify/types" "*"
+    pathe "^0.3.0"
+
+"@iconify/types@*", "@iconify/types@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@iconify/types/-/types-2.0.0.tgz#ab0e9ea681d6c8a1214f30cd741fe3a20cc57f57"
+  integrity sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==
+
+"@iconify/utils@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@iconify/utils/-/utils-2.0.0.tgz#2a807c79b2dea549a014166c4311961935d25780"
+  integrity sha512-thvwZ6m3frWJiOYwRdHPSPGC25rmyvDl0vXdQ8ocRJZx31m8Pn4y7V1mTc5UReR6MiAj+hrV2UPZQjx7zI960g==
+  dependencies:
+    "@antfu/install-pkg" "^0.1.0"
+    "@antfu/utils" "^0.5.2"
+    "@iconify/types" "^2.0.0"
+    debug "^4.3.4"
+    kolorist "^1.5.1"
+    local-pkg "^0.4.2"
 
 "@ioredis/commands@^1.1.1":
   version "1.2.0"
@@ -2951,6 +2989,14 @@ fill-range@^7.0.1:
   dependencies:
     to-regex-range "^5.0.1"
 
+find-up@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/find-up/-/find-up-5.0.0.tgz#4c92819ecb7083561e4f4a240a86be5198f536fc"
+  integrity sha512-78/PXT1wlLLDgTzDs7sjq9hzz0vXD+zn+7wypEe4fXQxCmdmqfGsEPQxmiCSQI3ajFV91bVSsvNtrJRiW6nGng==
+  dependencies:
+    locate-path "^6.0.0"
+    path-exists "^4.0.0"
+
 flat@^5.0.0:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/flat/-/flat-5.0.2.tgz#8ca6fe332069ffa9d324c327198c598259ceb241"
@@ -3718,6 +3764,11 @@ koa@^2.12.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
+kolorist@^1.5.1, kolorist@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/kolorist/-/kolorist-1.6.0.tgz#f43ac794305b30032a5bedcae7799d0f91d2ff36"
+  integrity sha512-dLkz37Ab97HWMx9KTes3Tbi3D1ln9fCAy2zr2YVExJasDRPGRaKcoE4fycWNtnCAJfjFqe0cnY+f8KT2JePEXQ==
+
 lazystream@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/lazystream/-/lazystream-1.0.1.tgz#494c831062f1f9408251ec44db1cba29242a2638"
@@ -3775,6 +3826,13 @@ local-pkg@^0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/local-pkg/-/local-pkg-0.4.2.tgz#13107310b77e74a0e513147a131a2ba288176c2f"
   integrity sha512-mlERgSPrbxU3BP4qBqAvvwlgW4MTg78iwJdGGnv7kibKjWcJksrG3t6LB5lXI93wXRDvG4NpUgJFmTG4T6rdrg==
+
+locate-path@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/locate-path/-/locate-path-6.0.0.tgz#55321eb309febbc59c4801d931a72452a681d286"
+  integrity sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==
+  dependencies:
+    p-locate "^5.0.0"
 
 lodash._reinterpolate@^3.0.0:
   version "3.0.0"
@@ -4416,6 +4474,20 @@ os-tmpdir@~1.0.2:
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
   integrity sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==
 
+p-limit@^3.0.2:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/p-limit/-/p-limit-3.1.0.tgz#e1daccbe78d0d1388ca18c64fea38e3e57e3706b"
+  integrity sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ==
+  dependencies:
+    yocto-queue "^0.1.0"
+
+p-locate@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/p-locate/-/p-locate-5.0.0.tgz#83c8315c6785005e3bd021839411c9e110e6d834"
+  integrity sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw==
+  dependencies:
+    p-limit "^3.0.2"
+
 parent-module@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/parent-module/-/parent-module-1.0.1.tgz#691d2709e78c79fae3a156622452d00762caaaa2"
@@ -4466,6 +4538,11 @@ parseurl@^1.3.2, parseurl@~1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.3.tgz#9da19e7bee8d12dff0513ed5b76957793bc2e8d4"
   integrity sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==
+
+path-exists@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-4.0.0.tgz#513bdbe2d3b95d7762e8c1137efa195c6c61b5b3"
+  integrity sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==
 
 path-is-absolute@1.0.1, path-is-absolute@^1.0.0:
   version "1.0.1"
@@ -5749,6 +5826,19 @@ universalify@^2.0.0:
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-2.0.0.tgz#75a4984efedc4b08975c5aeb73f530d02df25717"
   integrity sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==
 
+unplugin-icons@^0.14.11:
+  version "0.14.11"
+  resolved "https://registry.yarnpkg.com/unplugin-icons/-/unplugin-icons-0.14.11.tgz#fc63a8a67b2700a0b95884a4fc7d14b8350cabd4"
+  integrity sha512-szr6QA1ILT4RrJCmtvW41m2KPwUCCIx8QNgwEmTehvzEkSLDrdEaBhKGMWb/qTe5/zwnfwrDGcFT/6pGOSHJcA==
+  dependencies:
+    "@antfu/install-pkg" "^0.1.1"
+    "@antfu/utils" "^0.5.2"
+    "@iconify/utils" "^2.0.0"
+    debug "^4.3.4"
+    kolorist "^1.6.0"
+    local-pkg "^0.4.2"
+    unplugin "^0.9.6"
+
 unplugin@^0.9.2, unplugin@^0.9.5, unplugin@^0.9.6:
   version "0.9.6"
   resolved "https://registry.yarnpkg.com/unplugin/-/unplugin-0.9.6.tgz#f449173b619b9970bf3190d5419a66a727bb5d18"
@@ -6111,6 +6201,11 @@ ylru@^1.2.0:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/ylru/-/ylru-1.3.2.tgz#0de48017473275a4cbdfc83a1eaf67c01af8a785"
   integrity sha512-RXRJzMiK6U2ye0BlGGZnmpwJDPgakn6aNQ0A7gHRbD4I0uvK4TW6UqkK1V0pp9jskjJBAXd3dRrbzWkqJ+6cxA==
+
+yocto-queue@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
+  integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
 zip-stream@^4.1.0:
   version "4.1.0"
