@@ -15,6 +15,10 @@ export const useCryptoStore = defineStore({
 		loading: false as boolean,
 		entranceFee: null as string,
 		theme: "light" as string,
+		lotteryEntered: false as boolean,
+		recentWinner: null as string,
+		jackpot: null as string,
+		goerliRaffleContractAddress: "0x8D681042DeF5136453a575F26900E2d123F721Ab",
 	}),
 	actions: {
 		async connectMeta() {
@@ -31,11 +35,16 @@ export const useCryptoStore = defineStore({
 				console.log(error);
 			}
 		},
-		async getBalance() {
+		async getBalance(address?: string) {
 			try {
 				let provider = await new ethers.providers.Web3Provider(window.ethereum);
-				let balance = await provider.getBalance(this.address);
-				this.balance = ethers.utils.formatEther(balance).slice(0, 8);
+				let balance = await provider.getBalance(address ? address : this.address);
+				if (address) {
+					return balance;
+				} else {
+					this.balance = ethers.utils.formatEther(balance).slice(0, 8);
+				}
+				return balance;
 			} catch (error) {
 				console.log(error);
 			}
@@ -84,6 +93,25 @@ export const useCryptoStore = defineStore({
 				let entranceFee = await raffle.getEntranceFee();
 				this.entranceFee = ethers.utils.formatEther(entranceFee);
 				return entranceFee;
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async getRecentWinner() {
+			const raffle = await this.getContract();
+			try {
+				let winner = await raffle.getRecentWinner();
+				this.recentWinner = winner;
+				return winner;
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async getJackpot() {
+			try {
+				let jackpot = await this.getBalance(this.goerliRaffleContractAddress);
+				this.jackpot = ethers.utils.formatEther(jackpot);
+				return jackpot;
 			} catch (error) {
 				console.log(error);
 			}

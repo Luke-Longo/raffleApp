@@ -6,6 +6,12 @@
 				<div>Current Entrance Fee is {{ cryptoStore.entranceFee }} ETH</div>
 				<button @click="handleEnter">Enter Lottery</button>
 			</div>
+			<div class="flex gap-5 justify-center items-center">
+				Current Jackpot: {{ cryptoStore.jackpot }} ETH
+			</div>
+			<div class="flex gap-5 justify-center items-center">
+				Recent Winner: {{ cryptoStore.recentWinner }}
+			</div>
 		</client-only>
 	</div>
 </template>

@@ -25,6 +25,8 @@ console.log("loading", cryptoStore.loading);
 const handleConnect = () => {
 	cryptoStore.connectMeta();
 	console.log("connect");
+	cryptoStore.getRecentWinner();
+	cryptoStore.getJackpot();
 };
 </script>
 
