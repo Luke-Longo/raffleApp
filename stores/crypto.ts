@@ -16,6 +16,7 @@ export const useCryptoStore = defineStore({
 		lotteryEntered: false as boolean,
 		recentWinner: null as string,
 		jackpot: null as string,
+		players: null as number,
 		goerliRaffleContractAddress: "0x8D681042DeF5136453a575F26900E2d123F721Ab",
 	}),
 	actions: {
@@ -69,19 +70,19 @@ export const useCryptoStore = defineStore({
 		},
 		async enterLottery() {
 			this.loading = true;
-			const { provider } = await this.connect();
 			try {
 				const raffle = await this.getContract();
 				let tx = await raffle.enterRaffle({
 					value: ethers.utils.parseEther("0.1"),
 				});
-
-				provider.on("RaffleEnter", async () => {
+				raffle.on("RaffleEnter", async () => {
+					console.log("RaffleEnter");
 					this.lotteryEntered = true;
 					await this.load();
 				});
-				provider.on("WinnerPicked", async () => {
-					await this.load;
+				raffle.on("WinnerPicked", async () => {
+					console.log("WinnerPicked");
+					await this.load();
 				});
 				this.loading = false;
 			} catch (error) {
@@ -118,10 +119,20 @@ export const useCryptoStore = defineStore({
 				console.log(error);
 			}
 		},
+		async getPlayers() {
+			const raffle = await this.getContract();
+			try {
+				let players: number = await raffle.getNumberOfPlayers();
+				this.players = players;
+			} catch (error) {
+				console.log(error);
+			}
+		},
 		async load() {
 			await this.getJackpot();
 			await this.getRecentWinner();
 			await this.getEntranceFee();
+			await this.getPlayers();
 		},
 		setTheme(theme: string) {
 			document.documentElement.classList.add(theme);
