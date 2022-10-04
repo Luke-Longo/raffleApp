@@ -23,7 +23,16 @@ export const useCryptoStore = defineStore({
 	actions: {
 		async connectMeta() {
 			try {
-				this.provider = new ethers.providers.Web3Provider(window.ethereum);
+				let provider = new ethers.providers.Web3Provider(window.ethereum);
+				// Subscribe to chainId change
+				provider.on("chainChanged", (chainId: number) => {
+					console.log(chainId);
+				});
+				// Subscribe to provider connection
+				provider.on("connect", (info: { chainId: number }) => {
+					console.log(info);
+				});
+				this.provider = provider;
 				this.accounts = this.provider.send("eth_requestAccounts", []);
 				this.signer = await this.provider.getSigner();
 				let address = await this.signer.getAddress();

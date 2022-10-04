@@ -22,7 +22,7 @@ const cryptoStore = useCryptoStore();
 
 console.log("loading", cryptoStore.loading);
 
-const handleConnect = () => {
+const handleConnect = async () => {
 	cryptoStore.connectMeta();
 	console.log("connect");
 	cryptoStore.getRecentWinner();
