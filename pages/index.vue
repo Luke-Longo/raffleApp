@@ -23,7 +23,6 @@ const cryptoStore = useCryptoStore();
 onMounted(async () => {
 	await cryptoStore.load();
 	cryptoStore.toggleTheme();
-	await cryptoStore.listenEnter();
 	await cryptoStore.listenWinner();
 });
 
