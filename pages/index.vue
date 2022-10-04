@@ -23,7 +23,8 @@ const cryptoStore = useCryptoStore();
 onMounted(async () => {
 	await cryptoStore.load();
 	cryptoStore.toggleTheme();
-	await cryptoStore.listenWinner();
+	cryptoStore.listenWinner();
+	cryptoStore.listenEnter();
 });
 
 const handleConnect = async () => {
