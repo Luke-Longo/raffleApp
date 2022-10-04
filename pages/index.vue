@@ -20,13 +20,13 @@ import { useCryptoStore } from "~~/stores/crypto";
 
 const cryptoStore = useCryptoStore();
 
-console.log("loading", cryptoStore.loading);
+onMounted(async () => {
+	await cryptoStore.load();
+	cryptoStore.toggleTheme();
+});
 
 const handleConnect = async () => {
-	cryptoStore.connectMeta();
-	console.log("connect");
-	cryptoStore.getRecentWinner();
-	cryptoStore.getJackpot();
+	await cryptoStore.connect();
 };
 </script>
 

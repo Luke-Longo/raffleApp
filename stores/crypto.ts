@@ -1,13 +1,11 @@
 import { defineStore } from "pinia";
 import { ethers } from "ethers";
 import { abi } from "../constants/abi";
+import Web3Modal from "web3modal";
 
 export const useCryptoStore = defineStore({
 	id: "crypto",
 	state: () => ({
-		accounts: [] as ethers.providers.JsonRpcSigner[],
-		provider: null as ethers.providers.Web3Provider | null,
-		signer: null as ethers.providers.JsonRpcSigner | null,
 		address: null as string | null,
 		formattedAddress: null as string | null,
 		connected: false as boolean,
@@ -21,39 +19,34 @@ export const useCryptoStore = defineStore({
 		goerliRaffleContractAddress: "0x8D681042DeF5136453a575F26900E2d123F721Ab",
 	}),
 	actions: {
-		async connectMeta() {
+		async connect() {
 			try {
-				let provider = new ethers.providers.Web3Provider(window.ethereum);
-				// Subscribe to chainId change
-				provider.on("chainChanged", (chainId: number) => {
-					console.log(chainId);
+				const providerOptions = {};
+				const web3Modal = new Web3Modal({
+					cacheProvider: true, // optional
+					providerOptions, // required
 				});
-				// Subscribe to provider connection
+				const instance = await web3Modal.connect();
+				const provider = new ethers.providers.Web3Provider(instance);
+				const signer = provider.getSigner();
 				provider.on("connect", (info: { chainId: number }) => {
 					console.log(info);
 				});
-				this.provider = provider;
-				this.accounts = this.provider.send("eth_requestAccounts", []);
-				this.signer = await this.provider.getSigner();
-				let address = await this.signer.getAddress();
+				provider.on("disconnect", (error: { code: number; message: string }) => {
+					console.log(error);
+				});
+				const accounts = await provider.listAccounts();
+				const address = accounts[0];
 				this.address = address;
 				this.formattedAddress = address.slice(0, 6) + "..." + address.slice(-4);
 				this.connected = true;
-				this.getBalance();
-			} catch (error) {
-				console.log(error);
-			}
-		},
-		async getBalance(address?: string) {
-			try {
-				let provider = await new ethers.providers.Web3Provider(window.ethereum);
-				let balance = await provider.getBalance(address ? address : this.address);
-				if (address) {
-					return balance;
-				} else {
-					this.balance = ethers.utils.formatEther(balance).slice(0, 8);
-				}
-				return balance;
+				this.balance = await provider.getBalance(address).then((balance) => {
+					return ethers.utils.formatEther(balance);
+				});
+				return {
+					provider: provider as ethers.providers.Web3Provider,
+					signer: signer as ethers.providers.JsonRpcSigner,
+				};
 			} catch (error) {
 				console.log(error);
 			}
@@ -61,8 +54,9 @@ export const useCryptoStore = defineStore({
 		async getContract() {
 			try {
 				let raffle;
-				let provider = await new ethers.providers.Web3Provider(window.ethereum);
-				let signer = await provider.getSigner();
+				const { provider, signer } = await this.connect();
+				console.log(provider.provider.networkVersion);
+
 				if (provider.provider.networkVersion === "5") {
 					raffle = await new ethers.Contract(
 						"0x8D681042DeF5136453a575F26900E2d123F721Ab",
@@ -70,7 +64,7 @@ export const useCryptoStore = defineStore({
 						signer
 					);
 					console.log(raffle);
-				} else if (provider.provider.networkVersion === "31337") {
+				} else if (provider.networkVersion === "31337") {
 					raffle = await new ethers.Contract(
 						"0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
 						JSON.stringify(abi),
@@ -109,6 +103,7 @@ export const useCryptoStore = defineStore({
 		async getRecentWinner() {
 			const raffle = await this.getContract();
 			try {
+				console.log("getting recent winner");
 				let winner = await raffle.getRecentWinner();
 				this.recentWinner = winner;
 				return winner;
@@ -117,13 +112,20 @@ export const useCryptoStore = defineStore({
 			}
 		},
 		async getJackpot() {
+			const { provider } = this.connect();
+			console.log(provider);
 			try {
-				let jackpot = await this.getBalance(this.goerliRaffleContractAddress);
+				let jackpot = await provider.getBalance(this.goerliRaffleContractAddress);
 				this.jackpot = ethers.utils.formatEther(jackpot);
 				return jackpot;
 			} catch (error) {
 				console.log(error);
 			}
+		},
+		async load() {
+			this.getJackpot();
+			this.getRecentWinner();
+			this.getEntranceFee();
 		},
 		setTheme(theme: string) {
 			document.documentElement.classList.add(theme);
