@@ -29,12 +29,6 @@ export const useCryptoStore = defineStore({
 				const instance = await web3Modal.connect();
 				const provider = new ethers.providers.Web3Provider(instance);
 				const signer = provider.getSigner();
-				provider.on("connect", (info: { chainId: number }) => {
-					console.log(info);
-				});
-				provider.on("disconnect", (error: { code: number; message: string }) => {
-					console.log(error);
-				});
 				const accounts = await provider.listAccounts();
 				const address = accounts[0];
 				this.address = address;
@@ -55,16 +49,13 @@ export const useCryptoStore = defineStore({
 			try {
 				let raffle;
 				const { provider, signer } = await this.connect();
-				console.log(provider.provider.networkVersion);
-
 				if (provider.provider.networkVersion === "5") {
 					raffle = await new ethers.Contract(
 						"0x8D681042DeF5136453a575F26900E2d123F721Ab",
 						JSON.stringify(abi),
 						signer
 					);
-					console.log(raffle);
-				} else if (provider.networkVersion === "31337") {
+				} else if (provider.provider.networkVersion === "31337") {
 					raffle = await new ethers.Contract(
 						"0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
 						JSON.stringify(abi),
@@ -78,13 +69,20 @@ export const useCryptoStore = defineStore({
 		},
 		async enterLottery() {
 			this.loading = true;
+			const { provider } = await this.connect();
 			try {
 				const raffle = await this.getContract();
 				let tx = await raffle.enterRaffle({
 					value: ethers.utils.parseEther("0.1"),
 				});
-				await tx.wait();
-				console.log("You have entered the lottery!");
+
+				provider.on("RaffleEnter", async () => {
+					this.lotteryEntered = true;
+					await this.load();
+				});
+				provider.on("WinnerPicked", async () => {
+					await this.load;
+				});
 				this.loading = false;
 			} catch (error) {
 				console.log(error);
@@ -103,7 +101,6 @@ export const useCryptoStore = defineStore({
 		async getRecentWinner() {
 			const raffle = await this.getContract();
 			try {
-				console.log("getting recent winner");
 				let winner = await raffle.getRecentWinner();
 				this.recentWinner = winner;
 				return winner;
@@ -112,8 +109,7 @@ export const useCryptoStore = defineStore({
 			}
 		},
 		async getJackpot() {
-			const { provider } = this.connect();
-			console.log(provider);
+			const { provider } = await this.connect();
 			try {
 				let jackpot = await provider.getBalance(this.goerliRaffleContractAddress);
 				this.jackpot = ethers.utils.formatEther(jackpot);
@@ -123,9 +119,9 @@ export const useCryptoStore = defineStore({
 			}
 		},
 		async load() {
-			this.getJackpot();
-			this.getRecentWinner();
-			this.getEntranceFee();
+			await this.getJackpot();
+			await this.getRecentWinner();
+			await this.getEntranceFee();
 		},
 		setTheme(theme: string) {
 			document.documentElement.classList.add(theme);
