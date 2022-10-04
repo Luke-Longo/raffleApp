@@ -8,7 +8,7 @@
 		</ClientOnly>
 		<div
 			v-if="cryptoStore.loading"
-			class="flex flex-grow mt-40 justify-center trans bg-darkBg bg-opacity-30"
+			class="flex flex-grow mt-40 justify-center trans dark:bg-black bg-opacity-30 bg-white"
 		>
 			<UiBaseSpinner />
 		</div>
@@ -23,6 +23,8 @@ const cryptoStore = useCryptoStore();
 onMounted(async () => {
 	await cryptoStore.load();
 	cryptoStore.toggleTheme();
+	await cryptoStore.listenEnter();
+	await cryptoStore.listenWinner();
 });
 
 const handleConnect = async () => {

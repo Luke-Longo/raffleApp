@@ -6,6 +6,9 @@
 				<div>Current Entrance Fee is {{ cryptoStore.entranceFee }} ETH</div>
 				<button @click="handleEnter">Enter Lottery</button>
 			</div>
+			<div class="flex justify-center">
+				<p>Number of Players: {{ cryptoStore.players }}</p>
+			</div>
 			<div class="flex gap-5 justify-center items-center">
 				Current Jackpot: {{ cryptoStore.jackpot }} ETH
 			</div>
@@ -25,5 +28,7 @@ await cryptoStore.getEntranceFee();
 const handleEnter = async () => {
 	console.log("Entering Lottery");
 	await cryptoStore.enterLottery();
+	await cryptoStore.listenEnter();
+	await cryptoStore.listenWinner();
 };
 </script>

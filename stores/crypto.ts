@@ -75,16 +75,32 @@ export const useCryptoStore = defineStore({
 				let tx = await raffle.enterRaffle({
 					value: ethers.utils.parseEther("0.1"),
 				});
+				console.log("raffleEntered", tx);
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async listenWinner() {
+			const raffle = await this.getContract();
+			try {
+				raffle.on("WinnerPicked", async () => {
+					console.log("WinnerPicked");
+					await this.load();
+					this.loading = false;
+				});
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async listenEnter() {
+			const raffle = await this.getContract();
+			try {
 				raffle.on("RaffleEnter", async () => {
 					console.log("RaffleEnter");
 					this.lotteryEntered = true;
 					await this.load();
+					this.loading = false;
 				});
-				raffle.on("WinnerPicked", async () => {
-					console.log("WinnerPicked");
-					await this.load();
-				});
-				this.loading = false;
 			} catch (error) {
 				console.log(error);
 			}
